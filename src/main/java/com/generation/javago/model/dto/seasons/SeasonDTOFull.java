@@ -12,6 +12,6 @@ public class SeasonDTOFull extends GenericSeasonDTO {
 		super(season);
 		
 	}
-
+//aggiornamento
 
 }

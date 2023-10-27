@@ -1,6 +1,6 @@
 package com.generation.javago.model.entity;
 
-
+//aggiornamento
 import java.time.LocalDate;
 
 import javax.persistence.Entity;

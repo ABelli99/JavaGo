@@ -40,7 +40,7 @@ public Season convertToSeason()
     seasons.setStart_date(start_date);
     seasons.setEnd_date(end_date);
     seasons.setPercentage(percentage);
-
+//sus
     return seasons;
 }
 }
