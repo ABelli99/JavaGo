@@ -1,10 +1,9 @@
 Manifest-Version: 1.0
-Built-By: cioba
-Build-Jdk: 17.0.8.1
+Built-By: test
+Build-Jdk: 20.0.1
 Implementation-Title: spring-boot-jwt
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: com.generation
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
  -starter-parent/spring-boot-jwt
 Created-By: Maven Integration for Eclipse
-
