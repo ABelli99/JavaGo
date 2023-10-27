@@ -2,9 +2,9 @@ package com.generation.javago.model.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.generation.javago.model.entity.Seasons;
+import com.generation.javago.model.entity.Season;
 
-public interface SeasonsRepository extends JpaRepository<Seasons, Integer>
+public interface SeasonsRepository extends JpaRepository<Season, Integer>
 {
 
 }
