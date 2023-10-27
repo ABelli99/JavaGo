@@ -1,6 +1,6 @@
 package com.generation.javago.model.entity;
 
-
+//aggiornamento
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
-public class Seasons 
+public class Season 
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
