@@ -29,12 +29,12 @@ public class RoomDTOFull extends GenericRoomDTO
 	{
 		Room room = new Room();
 		
-		room.setRooms
+		room.setBooking
 		(
 				booking.stream()
 				.map(RBDTOFull ->
 						{
-							RoomBooking roombooking = RBDTOFull.convertToRoomBooking();
+							RoomBooking roombooking = RBDTOFull.revertToRoomBooking();
 							roombooking.setRoom(room);
 							return roombooking;
 						}						
