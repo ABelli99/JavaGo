@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
-public class Seasons 
+public class Season 
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
