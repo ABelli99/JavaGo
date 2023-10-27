@@ -1,3 +1,6 @@
+/target/
+/target/classes/application.properties
+/target/classes/META-INF/maven/com.generation/spring-boot-jwt/pom.properties
 .metadata
 bin/
 tmp/
