@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.generation.javago.model.repository.RoomBookingRepository;
 import com.generation.javago.model.repository.RoomRepository;
 import com.generation.javago.model.repository.SeasonsRepository;
-import com.generation.javago.model.repository.UserRepository;
+import com.generation.javago.model.repository.User2Repository;
 
 
 @CrossOrigin
@@ -27,7 +27,7 @@ public class SeasonsController {
 	SeasonsRepository srepo;
 	
 	@Autowired
-	UserRepository urepo;
+	User2Repository urepo;
 
 
 

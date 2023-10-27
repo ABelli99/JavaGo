@@ -13,9 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserwBooking extends GenericUserDTO{
+public class UserwBookingDTO extends GenericUserDTO{
 
-	public UserwBooking(User u) {
+	public UserwBookingDTO(User u) {
 		super(u);
 	}
 	
