@@ -6,16 +6,16 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class JavazonApplication extends SpringBootServletInitializer
+public class JavaGoApplication extends SpringBootServletInitializer
 {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavazonApplication.class, args);
+		SpringApplication.run(JavaGoApplication.class, args);
 	}
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(JavazonApplication.class);
+		return application.sources(JavaGoApplication.class);
 	}
 
 }
