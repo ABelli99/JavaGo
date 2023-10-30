@@ -15,24 +15,15 @@ import com.generation.javago.controller.util.InvalidEntityException;
 import com.generation.javago.model.dto.user.UserDTO;
 import com.generation.javago.model.dto.user.UserwBookingDTO;
 import com.generation.javago.model.entity.User;
-import com.generation.javago.model.repository.RoomBookingRepository;
-import com.generation.javago.model.repository.RoomRepository;
-import com.generation.javago.model.repository.SeasonsRepository;
 import com.generation.javago.model.repository.User2Repository;
 
 @RestController
 @CrossOrigin
 public class UserController {
-	@Autowired
-    RoomBookingRepository rbRepo;
-    @Autowired
-    RoomRepository rRepo;
-    @Autowired
-    SeasonsRepository sRepo;
     @Autowired
     User2Repository uRepo;
 	/**
-	 * send users + booked  rooms  of  the user
+	 * send users + booked rooms of the user
 	 * @return
 	 * list with all users
 	 */
@@ -44,7 +35,9 @@ public class UserController {
 	
 	
 	/**
-	 * get int from URI, if exist send user, otherwise send exception 
+	 * get int from URI, 
+	 * 		if exist send user, 
+	 * 		else send exception 
 	 * @param 		id
 	 * @return 		User
 	 * @exception 	404
@@ -63,9 +56,9 @@ public class UserController {
 	 * 	<<Row in DB
 	 * @param 		User
 	 * @return 		row in DB
-	 * @exception 	
+	 * @exception 	406
 	 */
-	@PostMapping("/register")
+	@PostMapping("/addGuest")
 	public UserDTO createOne(@RequestBody UserDTO dto) 
 	{
 		User toInsert = dto.revertToUser();
@@ -85,8 +78,9 @@ public class UserController {
 	 * >>UserDTO
 	 * 		checks on the user
 	 * <<Row in DB
-	 * @param User
-	 * @return row in DB
+	 * @param 		User
+	 * @return 		row in DB
+	 * @exception 	406
 	 */
 	@PostMapping("/addEmployee")
 	public UserDTO addEmployee(@RequestBody UserDTO dto) 
@@ -105,43 +99,4 @@ public class UserController {
 		return new UserDTO(uRepo.save(toInsert));
 	}
 	
-	/**
-	 * Entra un intero e un ClientewOrdiniDTO, viene controllato se esiste e se la modifica è valida, 
-	 * se tutto va bene viene modificato il Cliente sul DB
-	 * @param id
-	 * @param dto
-	 * @return
-	 *\/
-	@PutMapping("/clienti/{id}")
-	public ClientewOrdiniDTO modifyOne(@PathVariable int id, @RequestBody ClientewOrdiniDTO dto) 
-	{
-		if(repo.findById(id).isEmpty())
-			throw new NoSuchElementException("sei sotto effetto di droghe fra, non puoi modificare qualcosa che non esiste");
-		Cliente c = dto.revertToClient();
-		c.setId(id);
-		if(!c.isValid())
-			throw new InvalidEntityException("se provi a modificare un altra volta un cliente e renderlo invalido ti mando Samuele con il coltello sotto casa");
-		return new ClientewOrdiniDTO(repo.save(c));
-	}
-	
-	/**
-	 * Entra un intero, vengono fatti controlli, se la richiesta di delete è corretta, tutti gli ordini del cliente eliminato
-	 * vengono dati ad un cliente fittizio con id 1
-	 * @param id
-	 *\/
-	@DeleteMapping("/clienti/{id}")
-	public void deleteOne(@PathVariable int id) 
-	{
-		if(repo.findById(id).isEmpty())
-			throw new NoSuchElementException("sei sotto effetto di droghe fra, non puoi cancellare qualcosa che non esiste");
-		//List<Ordine> ordini = repo.findById(id).get().getOrdini().stream().map(ordine-> ordine.getCliente().setId(1)).toList();
-		List<Ordine> ordini = repo.findById(id).get().getOrdini();
-		for(Ordine o:ordini)
-		{
-			o.getCliente().setId(1);
-			oRepo.save(o);
-		}
-		repo.deleteById(id);
-	}
-	*/
 }
