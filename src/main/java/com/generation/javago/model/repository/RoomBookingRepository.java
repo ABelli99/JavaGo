@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.generation.javago.model.entity.Room;
 import com.generation.javago.model.entity.RoomBooking;
 
 public interface RoomBookingRepository extends JpaRepository<RoomBooking, Integer>
 {
-	List<RoomBooking> findByRoom(String name);
+	List<RoomBooking> findByRoom(Room room);
 }
