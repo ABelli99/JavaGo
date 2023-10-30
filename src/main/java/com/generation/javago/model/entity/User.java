@@ -43,13 +43,27 @@ public class User {
     {
         List<String> res= new ArrayList<String>();
         
+        //check for pssw
         if(!patternMatches())
             res.add("email not valid\n");
         
+        //check for type empty
         if(type.isBlank() || type==null)
             res.add("type not valid\n");
         
+        //check for correct type
+        if(!(isEmployee() || isGuest()))
+        	res.add("type not valid");
+        
         return res;
+    }
+    
+    public boolean isEmployee() {
+    	return type.equalsIgnoreCase("employee");
+    }
+    
+    public boolean isGuest() {
+    	return type.equalsIgnoreCase("guest");
     }
 
 	public  boolean patternMatches() 
