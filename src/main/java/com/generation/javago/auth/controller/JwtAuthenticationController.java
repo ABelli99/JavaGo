@@ -59,7 +59,7 @@ public class JwtAuthenticationController {
 	{
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));//criptando la password
 		repo.save(user);
-		
+			
 		UserDetails userDetails = jwtInMemoryUserDetailsService
 				.loadUserByUsername(user.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);

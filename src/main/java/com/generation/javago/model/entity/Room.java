@@ -26,7 +26,7 @@ public class Room
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String room_name,notes;
+	private String roomName,notes;
 	private Double base_price;
 	private Integer capacity;
 	
