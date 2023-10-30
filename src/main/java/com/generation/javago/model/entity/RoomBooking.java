@@ -29,7 +29,7 @@ public class RoomBooking {
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="room")
+	@JoinColumn(name="room",referencedColumnName = "roomName")
 	private Room room;
 	private LocalDate check_in_date;
 	private LocalDate check_out_date;
@@ -37,7 +37,7 @@ public class RoomBooking {
 	private Integer num_of_guests;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="email")
+	@JoinColumn(name="email",referencedColumnName = "email")
 	private User user;
 	
 	private String guest_information;

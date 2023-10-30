@@ -9,8 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RoomBookingDTOFull extends GenericRoomBookingDTO{
-	public RoomBookingDTOFull(RoomBooking rb) {
+public class RoomBookingDTOFull extends GenericRoomBookingDTO
+{
+	public RoomBookingDTOFull(RoomBooking rb) 
+	{
 		super(rb);
 	}
 }
