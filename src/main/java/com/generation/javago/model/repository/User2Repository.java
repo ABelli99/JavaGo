@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.generation.javago.model.entity.User;
 
-public interface UserRepository extends JpaRepository<User, Integer>
+public interface User2Repository extends JpaRepository<User, Integer>
 {
 
 }

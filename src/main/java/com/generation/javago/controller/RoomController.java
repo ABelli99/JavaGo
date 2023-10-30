@@ -1,28 +1,37 @@
 package com.generation.javago.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.generation.javago.model.dto.room.RoomDTONoList;
 import com.generation.javago.model.repository.RoomBookingRepository;
 import com.generation.javago.model.repository.RoomRepository;
 import com.generation.javago.model.repository.SeasonsRepository;
-import com.generation.javago.model.repository.UserRepository;
+import com.generation.javago.model.repository.User2Repository;
 
 @CrossOrigin
 @RestController
 public class RoomController 
 {
-	
-	@Autowired
-	RoomBookingRepository rbrepo;
-	@Autowired
-	RoomRepository rrepo;
-	@Autowired
-	SeasonsRepository srepo;
-	@Autowired
-	UserRepository urepo;
+
+    @Autowired
+    RoomBookingRepository rbRepo;
+    @Autowired
+    RoomRepository rRepo;
+    @Autowired
+    SeasonsRepository sRepo;
+    @Autowired
+    User2Repository uRepo;
+
+    @GetMapping("/rooms")
+    public List<RoomDTONoList> getAll()
+    {
+        return rRepo.findAll().stream().map(room -> new RoomDTONoList(room)).toList();
+    }
 
 
-	
 }
