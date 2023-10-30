@@ -6,5 +6,5 @@ import com.generation.javago.model.entity.Room;
 
 public interface RoomRepository extends JpaRepository<Room, Integer>
 {
-
+	Room findByRoomName(String name); 
 }

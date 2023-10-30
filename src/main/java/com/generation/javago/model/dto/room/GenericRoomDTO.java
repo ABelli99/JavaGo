@@ -22,7 +22,7 @@ public abstract class GenericRoomDTO
 	public GenericRoomDTO (Room room)
 	{
 		id = room.getId();
-		room_name = room.getRoom_name();
+		room_name = room.getRoomName();
 		notes = room.getNotes();
 		base_price = room.getBase_price();
 		capacity = room.getCapacity();
@@ -32,7 +32,7 @@ public abstract class GenericRoomDTO
 	{
 		Room room = new Room();
 		room.setId(id);
-		room.setRoom_name(room_name);
+		room.setRoomName(room_name);
 		room.setNotes(notes);
 		room.setBase_price(base_price);
 		room.setCapacity(capacity);

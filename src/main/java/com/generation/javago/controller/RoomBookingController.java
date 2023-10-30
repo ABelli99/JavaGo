@@ -127,7 +127,7 @@ public class RoomBookingController {
     public ResponseEntity<List<RoomBookingDTOFull>> getRoomBookingsByRoomName(@PathVariable String roomName) {
         List<RoomBooking> roomBookings = rbRepo.findAll();
         List<RoomBookingDTOFull> filteredRoomBookings = roomBookings.stream()
-                .filter(booking -> booking.getRoom().getRoom_name().equals(roomName))
+                .filter(booking -> booking.getRoom().getRoomName().equals(roomName))
                 .map(RoomBookingDTOFull::new)
                 .collect(Collectors.toList());
         if (filteredRoomBookings.isEmpty()) {
