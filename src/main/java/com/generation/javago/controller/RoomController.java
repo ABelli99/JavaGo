@@ -34,7 +34,9 @@ public class RoomController
     @GetMapping("/rooms")
     public List<RoomDTONoList> getAll()
     {
-        return rRepo.findAll().stream().map(room -> new RoomDTONoList(room)).toList();
+        return rRepo.findAll()
+        		.stream()
+        		.map(room -> new RoomDTONoList(room)).toList();
     }
 
     @GetMapping("/rooms/{id}")
@@ -54,6 +56,16 @@ public class RoomController
     			throw new NoSuchElementException("Non ho trovato alcuna stanza con quel nome");
 
     	return new RoomDTONoList(rRepo.findByRoomName(name));
+    }
+    
+    
+    @GetMapping("/rooms/{nm}/capacity")
+    public List<RoomDTONoList> getRoomByCapacity(@PathVariable Integer nm)
+    {
+		if(rRepo.findByCapacity(nm)==null)
+			throw new NoSuchElementException("Non ho trovato alcuna stanza con quella capacità");
+		
+		return rRepo.findByCapacity(nm).stream().map(room -> new RoomDTONoList(room)).toList();
     }
     
     
