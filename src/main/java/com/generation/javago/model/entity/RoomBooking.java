@@ -16,6 +16,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Bookings of the rooms, 
+ * 		have User & 
+ * 			 Room obj
+ * 
+ * Actual Entity of the DB in java
+ * 
+ * @author ABelli
+ *
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,10 +42,10 @@ public class RoomBooking {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="room",referencedColumnName = "roomName")
 	private Room room;
-	private LocalDate check_in_date;
-	private LocalDate check_out_date;
+	private LocalDate checkInDate;
+	private LocalDate checkOutDate;
 	private Double price;
-	private Integer num_of_guests;
+	private Integer numOfGuests;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="email",referencedColumnName = "email")
@@ -44,8 +55,8 @@ public class RoomBooking {
 	
 	public boolean isBetween(LocalDate data1,LocalDate data2 ) 
 	{      
-		boolean isData1Between = data1.isAfter(check_in_date) && data1.isBefore(check_out_date);
-	    boolean isData2Between = data2.isAfter(check_in_date) && data2.isBefore(check_out_date);
+		boolean isData1Between = data1.isAfter(checkInDate) && data1.isBefore(checkOutDate);
+	    boolean isData2Between = data2.isAfter(checkInDate) && data2.isBefore(checkOutDate);
 	    return isData1Between || isData2Between;  
 	}
 	

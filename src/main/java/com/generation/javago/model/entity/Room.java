@@ -18,6 +18,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Room entity of the database in java
+ * 
+ * @author Gory
+ *
+ */
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

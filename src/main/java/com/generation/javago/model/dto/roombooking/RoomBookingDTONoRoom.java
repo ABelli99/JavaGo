@@ -1,6 +1,5 @@
 package com.generation.javago.model.dto.roombooking;
 
-import com.generation.javago.model.entity.Room;
 import com.generation.javago.model.entity.RoomBooking;
 import com.generation.javago.model.entity.User;
 
@@ -11,21 +10,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+
 /**
- * RoomBooking w Room&User
+ * RoomBooking w/o Room
  * @author ABelli
  *
  */
-public class RoomBookingDTOFull extends GenericRoomBookingDTO
+public class RoomBookingDTONoRoom extends GenericRoomBookingDTO
 {
-	protected Room room;
 	protected User user;
 	
-	public RoomBookingDTOFull(RoomBooking rb) 
+	public RoomBookingDTONoRoom(RoomBooking rb) 
 	{
 		super(rb);
 		user = rb.getUser();
-		room = rb.getRoom();
 	}
 	
 	public RoomBooking revertToRoomBooking() 
@@ -33,12 +31,8 @@ public class RoomBookingDTOFull extends GenericRoomBookingDTO
 			
 		RoomBooking rb = super.revertToRoomBooking();
 		
-		rb.setRoom(room);
 		rb.setUser(user);
 		
 		return rb;
 	}
-	
-	
-	
 }

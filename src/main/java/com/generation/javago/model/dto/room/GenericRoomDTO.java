@@ -6,6 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * generic DTO (Data Transfer Obj) for room
+ * useful for DB entity
+ * @author Gory, ABelli
+ *
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor

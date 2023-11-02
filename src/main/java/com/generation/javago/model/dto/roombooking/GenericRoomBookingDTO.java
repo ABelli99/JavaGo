@@ -13,15 +13,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+/**
+ * Generic RoomBooking 
+ * 
+ * 		w/o objects,
+ * 		closest to DB entity.
+ * 
+ * @author ABelli
+ *
+ */
 public abstract class GenericRoomBookingDTO 
 {
 
 	public GenericRoomBookingDTO(RoomBooking rb) {
 		id = rb.getId();
-		check_in_date = rb.getCheck_in_date();
-		check_out_date = rb.getCheck_out_date();
+		check_in_date = rb.getCheckInDate();
+		check_out_date = rb.getCheckOutDate();
 		price = rb.getPrice();
-		num_of_guests = rb.getNum_of_guests();
+		num_of_guests = rb.getNumOfGuests();
 		guest_information = rb.getGuest_information();
 	}
 	
@@ -29,10 +38,10 @@ public abstract class GenericRoomBookingDTO
 	{
 		RoomBooking rb = RoomBooking.builder()
 					 .id(id)
-					 .check_in_date(check_in_date)
-					 .check_out_date(check_out_date)
+					 .checkInDate(check_in_date)
+					 .checkOutDate(check_out_date)
 					 .price(price)
-					 .num_of_guests(num_of_guests)
+					 .numOfGuests(num_of_guests)
 					 .guest_information(guest_information)
 				 .build();
 		return rb;
