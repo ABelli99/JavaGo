@@ -6,6 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  not generic user 
+ * 
+ * @author ABelli
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

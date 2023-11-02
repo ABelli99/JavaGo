@@ -21,6 +21,8 @@ import com.generation.javago.auth.model.JwtRequest;
 import com.generation.javago.auth.model.JwtResponse;
 import com.generation.javago.auth.model.UserInDb;
 import com.generation.javago.auth.service.UserRepository;
+import com.generation.javago.model.entity.User;
+import com.generation.javago.model.repository.User2Repository;
 
 @RestController
 @CrossOrigin
@@ -33,6 +35,8 @@ public class JwtAuthenticationController {
 	private JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private UserRepository repo;
+	@Autowired
+	private User2Repository userRepo2;
 
 	
 	
@@ -59,7 +63,13 @@ public class JwtAuthenticationController {
 	{
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));//criptando la password
 		repo.save(user);
-			
+		
+		//theorycrafting  di ABelli[
+		User test =  new User();
+		test.setEmail(user.getUsername());
+		test.setType("guest");
+		userRepo2.save(test);
+		//]theorycrafting  di ABelli
 		UserDetails userDetails = jwtInMemoryUserDetailsService
 				.loadUserByUsername(user.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);

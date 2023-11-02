@@ -20,6 +20,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * User is the single row of the DB.
+ * 
+ * Actual Entity of the DB in java
+ * 
+ * @author ABelli
+ *
+ */
+
 @Data
 @Entity
 @AllArgsConstructor
