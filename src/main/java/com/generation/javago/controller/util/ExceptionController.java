@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+/**
+ * controller for handling personal exceptions 
+ * @author ABelli
+ *
+ */
 @RestControllerAdvice
 public class ExceptionController 
 {
@@ -64,6 +69,12 @@ public class ExceptionController
 	public  ResponseEntity <String> handleInvalidEntityException(InvalidEntityException e)
 	{
 		return new ResponseEntity <String>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	@ExceptionHandler(UnAuthorizedException.class) 
+	public  ResponseEntity <String> handleUnAuthorizedException(UnAuthorizedException e)
+	{
+		return new ResponseEntity <String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 	}
 	
 
