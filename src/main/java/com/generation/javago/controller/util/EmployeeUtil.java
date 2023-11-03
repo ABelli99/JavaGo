@@ -1,5 +1,7 @@
 package com.generation.javago.controller.util;
 
+import java.util.NoSuchElementException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +35,39 @@ public class EmployeeUtil
 	{
 		String token = request.getHeader("Authorization").substring(7);
 		String email = util.getUsernameFromToken(token);
-		return uRepo.findByEmail(email).getType().equals("employee");
+		
+		if(uRepo.findByEmail(email).isEmpty())
+			throw new NoSuchElementException("sei sotto effetto di droghe fra");
+		
+		return uRepo.findByEmail(email).get().getType().equals("employee");
 	}
 	
+	/**
+	 * get id  from the token
+	 * @return 
+	 * 		int [id]
+	 */
 	public int getIdFromToken() {
 		String token = request.getHeader("Authorization").substring(7);
 		String email = util.getUsernameFromToken(token);
 		
-		return uRepo.findByEmail(email).getId();
+		if(uRepo.findByEmail(email).isEmpty())
+			throw new NoSuchElementException("sei sotto effetto di droghe fra");
+		
+		return uRepo.findByEmail(email).get().getId();
 	}
 
+	/**
+	 * get email from the token
+	 * @return 
+	 * 		String [email]
+	 */
+	public String getEmailFromToken() {
+
+        String token = request.getHeader("Authorization").substring(7);
+        String email = util.getUsernameFromToken(token);
+
+        return email;
+    }
+	
 }
