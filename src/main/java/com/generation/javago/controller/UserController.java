@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.generation.javago.controller.util.EmployeeUtil;
 import com.generation.javago.controller.util.InvalidEntityException;
 import com.generation.javago.controller.util.UnAuthorizedException;
-import com.generation.javago.model.dto.roombooking.RoomBookingDTONoObj;
 import com.generation.javago.model.dto.roombooking.RoomBookingDTONoUser;
 import com.generation.javago.model.dto.user.UserDTO;
 import com.generation.javago.model.dto.user.UserwBookingDTO;
@@ -47,6 +46,27 @@ public class UserController {
 		
 		return uRepo.findAll().stream().map(user-> new UserwBookingDTO(user)).toList();
 	}
+	
+	
+	/**
+	 * send id from the user  email
+	 * @return
+	 * list with all users
+	 */
+	@PostMapping("/authenticate/{email}")
+	public int userGetId(@PathVariable String email) {
+		
+		//check if tokenID is equals to the sent ID // ignored if employee
+		if(!checkEmployee.isEmployee())
+			if(checkEmployee.getEmailFromToken()!=email)
+				throw new UnAuthorizedException("So cosa stai cercando di fare, brutto pagliaccio");
+		
+		if(uRepo.findByEmail(email).isEmpty())
+			throw new NoSuchElementException("sei sotto effetto di droghe fra");
+		
+		return uRepo.findByEmail(email).get().getId();
+	}
+	
 	/**
 	 * get int from URI, 
 	 * 		if exist send user, 
