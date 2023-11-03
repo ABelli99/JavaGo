@@ -58,7 +58,7 @@ public class UserController {
 		
 		//check if tokenID is equals to the sent ID // ignored if employee
 		if(!checkEmployee.isEmployee())
-			if(checkEmployee.getEmailFromToken()!=email)
+			if(!checkEmployee.getEmailFromToken().equalsIgnoreCase(email))
 				throw new UnAuthorizedException("So cosa stai cercando di fare, brutto pagliaccio");
 		
 		if(uRepo.findByEmail(email).isEmpty())

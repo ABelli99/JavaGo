@@ -67,6 +67,7 @@ public class EmployeeUtil
         String token = request.getHeader("Authorization").substring(7);
         String email = util.getUsernameFromToken(token);
 
+        System.out.println(email);
         return email;
     }
 	
