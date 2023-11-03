@@ -32,8 +32,20 @@ public interface RoomBookingRepository extends JpaRepository<RoomBooking, Intege
 	 * @param LocalDate [CheckOutDate]
 	 * @return List<RoomBooking>
 	 */
-	@Query("SELECT rb FROM RoomBooking rb WHERE rb.checkInDate >= :d1 AND rb.checkOutDate <= :d2")
+	@Query("SELECT rb FROM RoomBooking rb WHERE (rb.checkInDate BETWEEN :d1 AND :d2) OR (rb.checkOutDate BETWEEN :d1 AND :d2)")
 	List<RoomBooking> findByCheckInDateCheckOutDate(@Param("d1") LocalDate d1, @Param("d2") LocalDate d2);
+	
+	/**
+	 * find all bookings in the specified time-zone
+	 * AND by the specified user email
+	 * @param LocalDate [CheckInDate]
+	 * @param LocalDate [CheckOutDate]
+	 * @param String email
+	 * @return List<RoomBooking>
+	 */
+	@Query("SELECT rb FROM RoomBooking rb WHERE ((rb.checkInDate BETWEEN :d1 AND :d2) OR (rb.checkOutDate BETWEEN :d1 AND :d2)) AND email = :useremail")
+	List<RoomBooking> findByCheckInDateCheckOutDateEmail(@Param("d1") LocalDate d1, @Param("d2") LocalDate d2, @Param("useremail") String useremail);
+	
 	
 	/**
 	 * find all bookings with the given number of guests
