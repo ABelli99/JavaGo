@@ -17,7 +17,7 @@ public interface SeasonsRepository extends JpaRepository<Season, Integer>
 	 * @param LocalDate [endDate]
 	 * @return List<Season>
 	 */
-	@Query("SELECT rb FROM season rb WHERE (:d1 BETWEEN rb. AND rb.endDate) OR (:d2 BETWEEN rb.startDate AND rb.endDate)")
+	@Query("SELECT rb FROM Season rb WHERE (:d1 BETWEEN rb.start_date AND rb.end_date) OR (:d2 BETWEEN rb.start_date AND rb.end_date)")
 	List<Season> findByStartAndEndDate(@Param("d1") LocalDate d1, @Param("d2") LocalDate d2);
 	
 }
