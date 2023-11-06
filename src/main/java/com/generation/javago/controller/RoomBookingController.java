@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.generation.javago.controller.util.EmployeeUtil;
 import com.generation.javago.controller.util.UnAuthorizedException;
 import com.generation.javago.model.dto.roombooking.RoomBookingDTOFull;
+import com.generation.javago.model.entity.Season;
 import com.generation.javago.model.repository.RoomBookingRepository;
 import com.generation.javago.model.repository.RoomRepository;
+import com.generation.javago.model.repository.SeasonsRepository;
 
 @CrossOrigin
 @RestController
@@ -31,6 +33,9 @@ public class RoomBookingController {
     
     @Autowired
     RoomRepository rRepo;
+    
+    @Autowired
+    SeasonsRepository sRepo;
     
     @Autowired
     EmployeeUtil checkEmployee;
@@ -78,6 +83,38 @@ public class RoomBookingController {
     										 .toList();
     	return res;
     }
+    
+    /**
+     * 
+     * @param userid
+     * @param date1
+     * @param date2
+     * @return multiplier
+     */
+    @PostMapping("/overprice/{date1}/{date2}")
+	public Double findOverprice
+	(
+		@PathVariable("date1") String date1, 
+		@PathVariable("date2") String date2
+	){		
+		//formatting dates
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	LocalDate realDate1 = LocalDate.parse(date1,formatter), realDate2 = LocalDate.parse(date2,formatter);
+		
+		//get seasons within the book
+		List<Season> monneys = sRepo.findByStartAndEndDate(realDate1,realDate2);
+		
+		//calc raw multiplier
+		double mol = 1;
+		if(!monneys.isEmpty())
+			for(Season s : monneys) {
+				mol += s.getPercentage()/100;
+			}
+		
+		return mol;
+	}
+	
+    
 
     /* not used
     @PostMapping("/bookings/{capacity}")
