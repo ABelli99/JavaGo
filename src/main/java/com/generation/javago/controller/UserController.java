@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.generation.javago.controller.util.EmployeeUtil;
 import com.generation.javago.controller.util.InvalidEntityException;
 import com.generation.javago.controller.util.UnAuthorizedException;
+import com.generation.javago.model.dto.roombooking.RoomBookingDTONoObj;
 import com.generation.javago.model.dto.roombooking.RoomBookingDTONoUser;
 import com.generation.javago.model.dto.user.UserDTO;
 import com.generation.javago.model.dto.user.UserwBookingDTO;
+import com.generation.javago.model.entity.RoomBooking;
 import com.generation.javago.model.entity.User;
+import com.generation.javago.model.repository.RoomBookingRepository;
+import com.generation.javago.model.repository.RoomRepository;
+import com.generation.javago.model.repository.SeasonsRepository;
 import com.generation.javago.model.repository.User2Repository;
 
 @RestController
@@ -29,6 +34,15 @@ import com.generation.javago.model.repository.User2Repository;
 public class UserController {
     @Autowired
     User2Repository uRepo;
+    
+    @Autowired
+    SeasonsRepository sRepo;
+    
+    @Autowired
+    RoomRepository rRepo;
+    
+    @Autowired
+    RoomBookingRepository rbRepo;
     
     @Autowired
     EmployeeUtil checkEmployee;
@@ -167,4 +181,42 @@ public class UserController {
 		List<RoomBookingDTONoUser> res = fanculo.getBookings();
 		return res;
 	}
+	
+	/**
+	 * >>Json RoomBookingNoObj
+	 * 		usual integrity checks
+	 * <<Row in DB RoomBooking
+	 * @param 		Json
+	 * @return 		RoomBookingDTONoUser // row in DB
+	 * @exception 	406
+	 * @exception 	401
+	 */
+	@PostMapping("/user/{userid}/bookaroom/{roomid}")
+	public RoomBookingDTONoUser addBookedRoom(@PathVariable("userid") int userid, @PathVariable("roomid") int roomid, @RequestBody RoomBookingDTONoObj dto){
+		//check if tokenID is equals to the sent ID // ignored if employee
+		if(!checkEmployee.isEmployee())
+			if(checkEmployee.getIdFromToken()!=userid)
+				throw new UnAuthorizedException("So cosa stai cercando di fare, brutto pagliaccio");
+		
+		//check if user exist
+		if(uRepo.findById(userid).isEmpty())
+			throw new NoSuchElementException("sei sotto effetto di droghe fra, utente non trovato");	
+		
+		//check if room exist
+		if(rRepo.findById(roomid).isEmpty())
+			throw new NoSuchElementException("sei sotto effetto di droghe fra, room non trovata");	
+		
+		//getting roombooking
+		RoomBooking toInsert = dto.revertToRoomBooking();
+		
+		//setting user to roombooking
+		toInsert.setUser(uRepo.findById(userid).get());
+		
+		//setting room to roombooking
+		toInsert.setRoom(rRepo.findById(roomid).get());
+		
+		return new RoomBookingDTONoUser(rbRepo.save(toInsert));
+	}
+	
+	
 }
