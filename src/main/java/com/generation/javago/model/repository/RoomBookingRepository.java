@@ -32,7 +32,8 @@ public interface RoomBookingRepository extends JpaRepository<RoomBooking, Intege
 	 * @param LocalDate [CheckOutDate]
 	 * @return List<RoomBooking>
 	 */
-	@Query("SELECT rb FROM RoomBooking rb WHERE (:d1 BETWEEN rb.checkInDate AND rb.checkOutDate) OR (:d2 BETWEEN rb.checkInDate AND rb.checkOutDate)")
+
+	@Query("SELECT rb FROM RoomBooking rb WHERE rb.checkInDate BETWEEN :d1 AND :d2 OR rb.checkOutDate BETWEEN :d1 AND :d2")
 	List<RoomBooking> findByCheckInDateCheckOutDate(@Param("d1") LocalDate d1, @Param("d2") LocalDate d2);
 	
 	/**
