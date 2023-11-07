@@ -79,7 +79,25 @@ public class UserController {
 			throw new NoSuchElementException("sei sotto effetto di droghe fra");
 		
 		return uRepo.findByEmail(email).get().getId();
+
 	}
+	
+	@PostMapping("/authenticate2/{email}")
+	public String userGetType(@PathVariable String email) {
+		
+		//check if tokenID is equals to the sent ID // ignored if employee
+		if(!checkEmployee.isEmployee())
+			if(!checkEmployee.getEmailFromToken().equalsIgnoreCase(email))
+				throw new UnAuthorizedException("So cosa stai cercando di fare, brutto pagliaccio");
+		
+		if(uRepo.findByEmail(email).isEmpty())
+			throw new NoSuchElementException("sei sotto effetto di droghe fra");
+		
+		return uRepo.findByEmail(email).get().getType();
+
+	}
+	
+	
 	
 	/**
 	 * get int from URI, 
@@ -181,6 +199,7 @@ public class UserController {
 		List<RoomBookingDTONoUser> res = fanculo.getBookings();
 		return res;
 	}
+	
 	
 	/**
 	 * >>Json RoomBookingNoObj
