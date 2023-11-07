@@ -39,7 +39,14 @@ public class RoomBookingController {
     
     @Autowired
     EmployeeUtil checkEmployee;
-	  
+	 
+	/**
+	 * >>no entry
+	 * 		usual integrity checks
+	 * <<List of booking
+	 * @param 		Json
+	 * @return 		List of booking
+	 */
     @GetMapping("/bookings")
     public List<RoomBookingDTOFull> getAll() 
     {
@@ -67,11 +74,9 @@ public class RoomBookingController {
   
     @PostMapping("/bookings/{date1}/{date2}")
     public List<RoomBookingDTOFull> getBookingsBetween(@PathVariable("date1") String date1, @PathVariable("date2") String date2){
+
     	
-    	if(!checkEmployee.isEmployee())
-        	throw new UnAuthorizedException("Non sei un employee");
-    	
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	LocalDate realDate1 = LocalDate.parse(date1,formatter), realDate2 = LocalDate.parse(date2,formatter);
     	
     	
