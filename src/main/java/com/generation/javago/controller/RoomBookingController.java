@@ -103,7 +103,7 @@ public class RoomBookingController {
 		@PathVariable("date2") String date2
 	){		
 		//formatting dates
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	LocalDate realDate1 = LocalDate.parse(date1,formatter), realDate2 = LocalDate.parse(date2,formatter);
 		
 		//get seasons within the book
